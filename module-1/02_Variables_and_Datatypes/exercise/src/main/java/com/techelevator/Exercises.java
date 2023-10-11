@@ -476,10 +476,11 @@ public class Exercises {
 	    and then divide the total number of rooms to be painted by the combined rate.
 	    */
 		int rooms = 5;
-		double bill = rooms * 2.15;
-		double jill = rooms * 1.90;
-		double combinedRate = bill + jill;
-		double time = combinedRate / rooms;
+		double billRate = 1 / 2.15;
+		double jillRate = 1 / 1.9;
+		double combinedRate = billRate + jillRate;
+		double totalTime = 5 / combinedRate;
+
 
      
 
