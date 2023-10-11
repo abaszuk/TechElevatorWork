@@ -8,15 +8,15 @@ public class Lecture {
 		1. Create a variable to hold an int and call it numberOfExercises.
 			Then set it to 26.
 		*/
-
-		//System.out.println(numberOfExercises);
+		int numberOfExercises = 26;
+		System.out.println(numberOfExercises);
 
 		/*
 		2. Create a variable to hold a double and call it half.
 			Set it to 0.5.
 		*/
-
-		//System.out.println(half);
+		double half = 0.5;
+		System.out.println(half);
 
 		/*
 		3. Create a variable to hold a String and call it name.
@@ -55,28 +55,40 @@ public class Lecture {
 		9. Create and set a variable that holds the percentage of battery left on
 		your phone.
 		*/
+		int battery = 0;
+		System.out.println(battery + "%");
 
 		/*
 		10. Create an int variable that holds the difference between 121 and 27.
 		*/
+		int difference = 121 - 27;
+		System.out.println(difference);
 
 		/*
 		11. Create a double that holds the addition of 12.3 and 32.1.
 		*/
+		double addition = (12.30 + 32.10);
+		System.out.println(addition);
 
 		/*
 		12. Create a String that holds your full name.
 		*/
+		String fullName = "Alex Baszuk";
+		System.out.println(fullName);
 
 		/*
 		13. Create a String that holds the word "Hello, " concatenated onto your
 		name from above.
 		*/
+		String greeting = "Hello, " + fullName;
+		System.out.println(greeting);
 
 		/*
 		14. Add a " Esquire" onto the end of your full name and save it back to
 		the same variable.
 		*/
+		fullName = fullName + " Esquire";
+		System.out.println(fullName);
 
 		/*
 		15. Now do the same as exercise 14, but use the += operator.
