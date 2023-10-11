@@ -354,9 +354,9 @@ public class Exercises {
         39. There are 100 cupcakes for 8 children to share. How much will each
         person get if they share the cupcakes equally?
         */
-		int cupcakes = 100;
-		int children = 8;
-		int cakesPer = (int)(cupcakes / children);
+		double cupcakes = 100;
+		double children = 8;
+		double cakesPer = (cupcakes / children);
 
 
         /* Exercise 40
@@ -500,10 +500,10 @@ public class Exercises {
 	    53. The distance between New York and Chicago is 800 miles, and the train has already travelled 537 miles.
 	    What percentage of the trip as a whole number has been completed?
 	    */
-		int newYork = 800;
-		int traveled = 537;
-		double percent = traveled / newYork;
-		double wholeNumber = (int)percent * 100;
+		double distance = 800.0;
+		double traveled = 537.0;
+		double trip = ((traveled / distance) * 100);
+		int tripAsWhole = (int) trip;
 
 	}
 
