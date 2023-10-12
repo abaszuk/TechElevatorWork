@@ -24,6 +24,18 @@ public class Exercise06_RaceDay {
      * determineRaceBlock(30, true) ➔ 1
      */
     public int determineRaceBlock(int age, boolean isEarlyRegistration) {
+        //If they are >= 18 and registered early, they join the first block.
+        if (age >= 18 && isEarlyRegistration){
+            return 1;
+        }
+       //If they are >= 18 and did not register early, they join the second block.
+        if (age >= 18 && true != isEarlyRegistration) {
+            return 2;
+        }
+       //If they are < 18, they join the third block.
+        if (age < 18) {
+            return 3;
+        }
         return 0;
     }
 
@@ -49,6 +61,14 @@ public class Exercise06_RaceDay {
      * getBibNumber(30, 700, true) ➔ 1700
      */
     public int getBibNumber(int age, int registrationNumber, boolean isEarlyRegistration) {
+        //If they are >= 18 and registered early their race bib number is their registration number + 1000.
+        if (age >=18 && isEarlyRegistration){
+            return registrationNumber + 1000;
+        }
+        //If they are < 18, or >= 18 and did not register early, their race bib number is their registration number.
+        if (age < 18 || age >= 18 && true != isEarlyRegistration){
+            return registrationNumber;
+        }
         return 0;
     }
 
@@ -72,6 +92,16 @@ public class Exercise06_RaceDay {
      * getConfirmedBibNumber(30, 1001, true) ➔ 2001
      */
     public int getConfirmedBibNumber(int age, int registrationNumber, boolean isEarlyRegistration) {
+        //If they are >= 18 and registered early their race bib number is their registration number + 1000.
+        if (age >=18 && isEarlyRegistration){
+            return registrationNumber + 1000;
+        } if (registrationNumber > 1000){
+            return -1;
+        }
+        //If they are < 18, or >= 18 and did not register early, their race bib number is their registration number.
+        if (age < 18 || age >= 18 && true != isEarlyRegistration){
+            return registrationNumber;
+        }
         return 0;
     }
 }

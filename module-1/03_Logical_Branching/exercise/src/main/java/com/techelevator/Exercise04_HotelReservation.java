@@ -26,7 +26,12 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3) ➔ 269.97
      */
     public double calculateStayTotal(int numberOfNights) {
-        return 0.0;
+        if (numberOfNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return numberOfNights * DAILY_RATE;
+        } else {
+            return numberOfNights * DISCOUNT_RATE;
+        }
+
     }
 
     /*
@@ -41,7 +46,17 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, true) ➔ 344.97
      */
     public double calculateStayTotal(int numOfTotalNights, boolean includesParking) {
-        return 0.0;
+        if (includesParking && numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return ((numOfTotalNights * DAILY_RATE) + (numOfTotalNights * PARKING_RATE));
+        }
+        if (numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return numOfTotalNights * DAILY_RATE;
+        } else if (includesParking && numOfTotalNights >= MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return ((numOfTotalNights * DISCOUNT_RATE) + (numOfTotalNights * PARKING_RATE));
+        } else {
+            return numOfTotalNights * DISCOUNT_RATE;
+        }
+
     }
 
     /*
@@ -61,6 +76,26 @@ public class Exercise04_HotelReservation {
     calculateStayTotal(3, true, true) ➔ 364.97
      */
     public double calculateStayTotal(int numOfTotalNights, boolean includesParking, boolean includesLateCheckout) {
-        return 0.0;
+        if (includesParking && numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE && includesLateCheckout) {
+            return ((numOfTotalNights * DAILY_RATE) + (numOfTotalNights * PARKING_RATE) + LATE_CHECKOUT_FEE);
+        }
+        if (includesParking && numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return ((numOfTotalNights * DAILY_RATE) + (numOfTotalNights * PARKING_RATE));
+        } if (numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE && includesLateCheckout){
+            return ((numOfTotalNights * DAILY_RATE) + LATE_CHECKOUT_FEE);
+        }
+        if (numOfTotalNights < MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return numOfTotalNights * DAILY_RATE;
+        }
+        if (includesParking && numOfTotalNights >= MINIMUM_NIGHTS_FOR_DISCOUNT_RATE && includesLateCheckout) {
+            return ((numOfTotalNights * DISCOUNT_RATE) + (numOfTotalNights * PARKING_RATE) + LATE_CHECKOUT_FEE);
+        } if (numOfTotalNights >= MINIMUM_NIGHTS_FOR_DISCOUNT_RATE && includesLateCheckout){
+            return ((numOfTotalNights * DISCOUNT_RATE) + LATE_CHECKOUT_FEE);
+        }
+        else if (includesParking && numOfTotalNights >= MINIMUM_NIGHTS_FOR_DISCOUNT_RATE) {
+            return ((numOfTotalNights * DISCOUNT_RATE) + (numOfTotalNights * PARKING_RATE));
+        } else {
+            return numOfTotalNights * DISCOUNT_RATE;
+        }
     }
 }

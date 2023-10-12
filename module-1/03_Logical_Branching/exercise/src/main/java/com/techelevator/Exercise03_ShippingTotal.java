@@ -25,6 +25,11 @@ public class Exercise03_ShippingTotal {
      * calculateShippingRate(45) ➔ 0.75
      */
     public double calculateShippingRate(int weightPounds) {
+        if (weightPounds <= MAX_WEIGHT_POUNDS){ //Scamper Shipping Company charges $0.50 per pound for items up to and* including 40 pounds.
+            return UP_TO_40_LB_RATE;
+        } if (weightPounds > 40){
+            return OVER_40_LB_RATE;
+        }
         return 0.0;
     }
 
@@ -43,6 +48,12 @@ public class Exercise03_ShippingTotal {
      * calculateShippingTotal(45) ➔ 33.75
      */
     public double calculateShippingTotal(int weightPounds) {
+        if (weightPounds <= MAX_WEIGHT_POUNDS){
+
+            return UP_TO_40_LB_RATE * weightPounds;
+        } if (weightPounds > 40){
+            return OVER_40_LB_RATE * weightPounds;
+        }
         return 0.0;
     }
 
@@ -65,7 +76,25 @@ public class Exercise03_ShippingTotal {
      * calculateShippingTotal(45, true) ➔ 30.375
      */
     public double calculateShippingTotal(int weightPounds, boolean hasDiscount) {
-        return 0.0;
+
+        if (weightPounds <= MAX_WEIGHT_POUNDS && hasDiscount){
+
+            double preCode = (UP_TO_40_LB_RATE * weightPounds);
+            double postCode = preCode * .1;
+            double cost = preCode - postCode;
+            return cost;
+
+        } else if (weightPounds <= MAX_WEIGHT_POUNDS){
+            return UP_TO_40_LB_RATE * weightPounds;
+
+        } else if (weightPounds > 40 && hasDiscount){
+            double preCode = (OVER_40_LB_RATE * weightPounds);
+            double postCode = preCode * .1;
+            double cost = preCode - postCode;
+            return cost;
+        } else {
+            return OVER_40_LB_RATE * weightPounds;
+        }
     }
 
 }
