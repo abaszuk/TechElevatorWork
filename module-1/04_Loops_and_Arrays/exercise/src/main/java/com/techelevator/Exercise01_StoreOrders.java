@@ -43,7 +43,7 @@ public class Exercise01_StoreOrders {
 	 createOrder() → [10, 40, 31, 41]
      */
     public int[] createOrder() {
-        return new int[] {};
+        return new int[] {10,40,31,41};
     }
 
     /*
@@ -61,8 +61,19 @@ public class Exercise01_StoreOrders {
     getCalzoneSales([]) → 0
      */
     public int getCalzoneSales(int[] orders) {
-        return 0;
-    }
+        //declare a calzone counter
+        int calzoneCounter = 0;
+        //for loop to start at i=0 less than orders length i++
+        for (int i = 0; i < orders.length; i++) {
+            //check if item at index i is a calzone
+            if (orders[i] == CALZONE)
+                //if so increment calzone counter
+                calzoneCounter++;
+        }
+            //return calzone count
+            return calzoneCounter;
+        }
+
 
     /*
     Sally also needs to know the total revenue for all cheese pizzas sold on any given day.
@@ -79,6 +90,22 @@ public class Exercise01_StoreOrders {
     getCheesePizzaRevenue([SMALL_PEPPERONI, MEDIUM_PEPPERONI]) → 0
      */
     public int getCheesePizzaRevenue(int[] orders) {
-        return 0;
+
+        //initialize a small cheese, medium cheese, and large cheese
+        int cheeseTotal = 0;
+        //start for loop - where we can sum up the cost if its cheese
+        for (int i = 0; i < orders.length; i++){
+            if (orders[i] == SMALL_CHEESE) {
+                cheeseTotal += 8;
+            }
+            if (orders[i] == MEDIUM_CHEESE){
+                cheeseTotal += 11;
+            }
+            if (orders[i] == LARGE_CHEESE){
+                cheeseTotal += 14;
+            }
+        }
+        return cheeseTotal;
+
     }
 }
