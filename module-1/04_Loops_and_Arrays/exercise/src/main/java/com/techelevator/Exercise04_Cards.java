@@ -63,6 +63,16 @@ public class Exercise04_Cards {
     discardTopCard([]) → []
      */
     public String[] discardTopCard(String[] remainingDeck) {
-        return new String[] {remainingDeck[remainingDeck.length-2]};
+
+        if ((remainingDeck.length == 0)){
+            return new String[0];
+        }
+
+        String[] newDeck = new String[remainingDeck.length - 1];
+        for (int i = 0; i < newDeck.length; i++){
+            newDeck[i] = remainingDeck[i+1];
+        }
+        return newDeck;
+
     }    
 }
