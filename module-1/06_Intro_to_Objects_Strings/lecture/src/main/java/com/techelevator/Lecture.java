@@ -12,6 +12,7 @@ public class Lecture {
 
 
 
+
 		System.out.println("************************************");
 		System.out.println("****** MAKING A STRING OBJECT ******");
 		System.out.println("************************************");
