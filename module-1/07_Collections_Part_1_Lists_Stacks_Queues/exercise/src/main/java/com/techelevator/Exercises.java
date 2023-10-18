@@ -89,7 +89,14 @@ public class Exercises {
 	 oddOnly( {734, 233, 782, 811, 3, 9999} ) -> [233, 811, 3, 9999]
 	 */
 	public List<Integer> oddOnly(Integer[] integerArray) {
-		return null;
+		List<Integer> onlyOdd = new ArrayList<>();
+		for (Integer odds : integerArray){
+			if (odds%2 == 1){
+				onlyOdd.add(odds);
+			}
+		}
+
+		return onlyOdd;
 	}
 
 	/*
@@ -100,6 +107,14 @@ public class Exercises {
 	 foundIntTwice( [9, 9, 44, 2, 88, 9], 9) -> true
 	 */
 	public boolean foundIntTwice(List<Integer> integerList, int intToFind) {
+		int duplicate = 0;
+		for (Integer found : integerList){
+			if (found.equals(intToFind)){
+				duplicate++;
+			}
+		} if (duplicate >= 2){
+			return true;
+		}
 		return false;
 	}
 
@@ -116,7 +131,21 @@ public class Exercises {
 	HINT: To convert an Integer x to a String, you can use x.toString() in your code. For example, if x = 1, then x.toString() returns "1."
 	 */
 	public List<String> fizzBuzzList(Integer[] integerArray) {
-		return null;
+		List<String> newList = new ArrayList<>();
+		for (Integer stringList : integerArray){
+			if (stringList%3 == 0 && stringList%5 == 0){
+				newList.add("FizzBuzz");
+			} else if (stringList%3 == 0){
+				newList.add("Fizz");
+			} else if (stringList%5 == 0) {
+				newList.add("Buzz");
+
+			} else {
+				newList.add(stringList.toString());
+			}
+
+		}
+		return newList;
 	}
 
 	/*
@@ -129,7 +158,16 @@ public class Exercises {
      interleaveLists( [1, 2, 5, 8, 10], [4, 5, 6] )  ->  [1, 4, 2, 5, 5, 6, 8, 10]
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
-		return null;
+		List<Integer> wovenList = new ArrayList<>();
+		for (int i = 0; i < listOne.size(); i++) {
+			wovenList.add(listOne.get(i));
+			wovenList.add(listTwo.get(i));
+			if (listTwo.size() > listOne.size()) {
+				wovenList.add(listTwo.get((listTwo.size() - listOne.size()) + i));
+			}
+
+
+		} return wovenList;
 	}
 
 }
