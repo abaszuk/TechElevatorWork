@@ -1,10 +1,7 @@
 package com.techelevator;
 
 import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lecture {
 
@@ -172,10 +169,32 @@ public class Lecture {
 			System.out.println(villain);
 		}
 
-		System.out.println("####################");
-		System.out.println("       FOREACH");
-		System.out.println("####################");
-		System.out.println();
+
+		//Example of a stack
+		Stack<String> books = new Stack<>();
+
+		books.push("The Shining");
+		books.push("It");
+		books.push("Salem's Lot");
+		books.push("Carrie");
+
+		//Stacks are LIFO - meaning last in is the first out
+		System.out.println(books.pop());
+		System.out.println(books.pop());
+		System.out.println(books.pop());
+		System.out.println(books.pop());
+
+
+		//Or if I want a data structure that is FIFO - first in first out (similar to the take a number at the DMV)
+		Queue<String> line = new LinkedList<>();
+
+		line.offer("Bob");
+		line.offer("Jane");
+		line.offer("Christopher");
+
+		System.out.println(line.poll());
+		System.out.println(line.poll());
+		System.out.println(line.poll());
 
 
 	}
