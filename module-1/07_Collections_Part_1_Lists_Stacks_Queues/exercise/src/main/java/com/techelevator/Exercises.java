@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Exercises {
@@ -16,7 +17,8 @@ public class Exercises {
 	 array2List( {"Left", "Right", "Forward", "Back"} )  ->  ["Left", "Right", "Forward", "Back"]
 	 */
 	public List<String> array2List(String[] stringArray) {
-		return null;
+		List<String> newList = Arrays.asList(stringArray);
+		return newList;
 	}
 
 	/*
@@ -26,7 +28,8 @@ public class Exercises {
 	 list2Array( ["Left", "Right", "Forward", "Back"] )  ->  {"Left", "Right", "Forward", "Back"}
 	 */
 	public String[] list2Array(List<String> stringList) {
-		return null;
+		String[] newArray = stringList.toArray(new String[stringList.size()]);
+		return newArray;
 	}
 
 	/*
@@ -37,7 +40,14 @@ public class Exercises {
 	 no4LetterWords( {"Jack", "Jill", "Jane", "John", "Jim"} )  ->  ["Jim"]
 	 */
 	public List<String> no4LetterWords(String[] stringArray) {
-		return null;
+		List<String> no4Letters = new ArrayList<>();
+		for (String word : stringArray){
+			if (word.length() != 4){
+				no4Letters.add(word);
+			}
+		}
+
+		return no4Letters;
 	}
 
 	/*
@@ -47,7 +57,13 @@ public class Exercises {
 	 arrayInt2ListDouble( {84, 99, 3285, 13, 877} ) -> [42, 49.5, 1642.5, 6.5, 438.5]
 	 */
 	public List<Double> arrayInt2ListDouble(int[] intArray) {
-		return null;
+		List<Double> doubleList = new ArrayList<>();
+		for (int intList : intArray){
+			double int2double = (double)intList;
+			doubleList.add(int2double/2);
+		}
+
+		return doubleList;
 	}
 
 	/*
@@ -57,7 +73,13 @@ public class Exercises {
 	 findLargest( [34070, 1380, 81238, 7782, 234, 64362, 627] ) -> 81238
 	 */
 	public Integer findLargest(List<Integer> integerList) {
-		return null;
+		Integer largestValue = 0;
+		for (Integer large: integerList){
+			if (large > largestValue){
+				largestValue = large;
+			}
+		}
+		return largestValue;
 	}
 
 	/*

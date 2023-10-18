@@ -337,7 +337,7 @@ public class Exercises {
 	 doubleX("xxxxx") → true
 	 */
 	public boolean doubleX(String str) {
-		if (str.contains("xx")){
+		if (str.contains("xx") || str.startsWith("xx")){
 			return true;
 		}
 
@@ -398,9 +398,10 @@ public class Exercises {
 	 stringX("xabxxxcdx") → "xabcdx"
 	 */
 	public String stringX(String str) {
-		String removed = "";
+		String[] removed = new String[str.length()];
 		if (str.startsWith("x")){
-			removed = str.replace('x', ',');
+			removed = str.split("x", ',');
+			//removed = String.join(',');
 
 		}
 		return null;
@@ -433,7 +434,16 @@ public class Exercises {
 	 stringYak("yak123ya") → "123ya"
 	 */
 	public String stringYak(String str) {
-		return null;
+		String noYak = "";
+		for (int i = 0; i < str.length(); i++){
+			if (i + 2 < str.length() && str.charAt(i) == 'y' && str.charAt(i + 2) == 'k'){
+				i = i+2;
+			} else {
+				noYak += str.charAt(i);
+			}
+		}
+
+		return noYak;
 	}
 
 }
