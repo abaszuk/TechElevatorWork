@@ -413,7 +413,16 @@ public class Exercises {
 	 altPairs("CodingHorror") → "Congrr"
 	 */
 	public String altPairs(String str) {
-		return null;
+		String result = "";
+		for (int i = 0; i < str.length(); i+= 4) {
+			if (i + 2 < str.length()) {
+				result += str.substring(i, i + 2);
+			} else {
+				result += str.substring(i);
+			}
+		}
+
+		return result;
 	}
 
 	/*
