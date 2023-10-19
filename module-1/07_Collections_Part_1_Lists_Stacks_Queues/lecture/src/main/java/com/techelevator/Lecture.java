@@ -16,6 +16,8 @@ public class Lecture {
 		//while arraylist is the specific implementation of list that we want to use.
 		List<String> movies = new ArrayList<>();
 
+		
+
 		//We cannot make a list of primitives so we have to use the object
 		//version of primitives that java provides
 		List<Integer> numbers = new ArrayList<>();

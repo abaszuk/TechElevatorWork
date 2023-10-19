@@ -158,16 +158,17 @@ public class Exercises {
      interleaveLists( [1, 2, 5, 8, 10], [4, 5, 6] )  ->  [1, 4, 2, 5, 5, 6, 8, 10]
 	 */
 	public List<Integer> interleaveLists(List<Integer> listOne, List<Integer> listTwo) {
-		List<Integer> wovenList = new ArrayList<>();
-		for (int i = 0; i < listOne.size(); i++) {
-			wovenList.add(listOne.get(i));
-			wovenList.add(listTwo.get(i));
-			if (listTwo.size() > listOne.size()) {
-				wovenList.add(listTwo.get((listTwo.size() - listOne.size()) + i));
+		List<Integer> combined = new ArrayList<>();
+		for (int i = 0, j = 0; i < listOne.size() || j < listTwo.size(); i++, j++){
+			if (i < listOne.size()){
+				combined.add(listOne.get(i));
 			}
+			if (j<listTwo.size()){
+				combined.add(listTwo.get(j));
+			}
+		}
 
-
-		} return wovenList;
+		 return combined;
 	}
 
 }
