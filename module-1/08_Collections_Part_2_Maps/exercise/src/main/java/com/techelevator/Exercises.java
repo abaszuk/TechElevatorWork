@@ -181,7 +181,16 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Integer> wordCount(String[] words) {
-		return null;
+		Map<String, Integer> letterCount = new HashMap<>();
+		for (String word : words){
+
+			if (!letterCount.containsKey(word)){
+				letterCount.put(word, 0);
+			}
+			letterCount.put(word, letterCount.get(word) + 1);
+		}
+
+		return letterCount;
 	}
 
 	/*
@@ -196,7 +205,15 @@ public class Exercises {
 	 *
 	 */
 	public Map<Integer, Integer> integerCount(int[] ints) {
-		return null;
+		Map<Integer, Integer> count = new HashMap<>();
+		for (Integer number : ints){
+			if (!count.containsKey(number)){
+				count.put(number, 0);
+			}
+			count.put(number, count.get(number) + 1);
+		}
+
+		return count;
 	}
 
 	/*
@@ -209,7 +226,16 @@ public class Exercises {
 	 *
 	 */
 	public Map<String, Boolean> wordMultiple(String[] words) {
-		return null;
+		Map<String, Boolean> duplicates = new HashMap<>();
+		for (String word : words){
+
+			if (!duplicates.containsKey(word)){
+				duplicates.put(word, false);
+			} else {
+				duplicates.put(word, true);
+			}
+		}
+		return duplicates;
 	}
 
 	/*
@@ -224,6 +250,9 @@ public class Exercises {
 	 */
 	public Map<String, Integer> consolidateInventory(Map<String, Integer> mainWarehouse,
 			Map<String, Integer> remoteWarehouse) {
+		Map<String,Integer> newInventory = new HashMap<>();
+
+
 		return null;
 	}
 
