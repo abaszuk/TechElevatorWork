@@ -60,6 +60,16 @@ public class Customer {
         return age;
     }
 
+    //We can also create a getter that calculates a value
+    //on the fly but feels like it is only a property within the class
+    //We call these derived properties
+
+    //when a getter is returning a boolean
+    //you can use "is" or "has" instead of "get"
+    public boolean getNeedingCosigner(){
+        return age < 18;
+    }
+
     //setter for name field
     //typically void is the return type
     //void means nothing is being returned
