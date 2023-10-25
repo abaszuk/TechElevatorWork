@@ -1,6 +1,6 @@
 package com.techelevator.farm;
 
-public class Chicken extends FarmAnimal {
+public class Chicken extends FarmAnimal implements Audible {
 
 	public Chicken() {
 		super("Chicken", "cluck!");

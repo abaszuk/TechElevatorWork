@@ -1,6 +1,6 @@
 package com.techelevator.mariokart;
 
-public class Racer {
+public class Racer implements Raceable{
 
     public static final String SMALL_CART = "S";
     public static final String MEDIUM_CART= "M";
