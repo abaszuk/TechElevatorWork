@@ -1,6 +1,6 @@
 package com.techelevator.avengers;
 
-public class IronMan extends Avenger implements Flyable {
+public final class IronMan extends Avenger implements Flyable {
 
     private int durability;
 

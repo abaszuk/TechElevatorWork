@@ -3,8 +3,16 @@ package com.techelevator.farm;
 public class OldMacdonald {
 	public static void main(String[] args) {
 
+		//1. Create a new class Cat that extends FarmAnimal but will not allow any
+		//other classes to inherit from it
+
+		//2. Make it so that the getPrice() method in Pig cannot be overridden by any
+		//future classes that inherit from it
+
+		//3. Make FarmAnimal unable to be instantiated on its own
+
 		Singable[] singables =
-				new Singable[] {new Cow(), new Chicken(), new Pig(), new Tractor()};
+				new Singable[] {new Cow(), new Chicken(), new Pig(), new Tractor(), new Cat()};
 
 		for (Singable singable : singables) {
 			String name = singable.getName();
