@@ -56,7 +56,7 @@ GROUP BY state.state_abbreviation;
 -- Modify the previous query to sort the results by the number of cities in descending order.
 SELECT state.state_abbreviation, COUNT(city_name) AS num_cities
 FROM city
-JOIN state ON city.state_abbreviation = state.state_abbreviation
+JOIN state ON state.state_abbreviation = city.state_abbreviation  
 WHERE census_region = 'Midwest'
 GROUP BY state.state_abbreviation
 ORDER BY num_cities DESC;
@@ -82,11 +82,26 @@ GROUP BY state.state_abbreviation;
 -- UNION
 
 -- Write a query to retrieve all the place names in the city and state tables that begin with "W" sorted alphabetically. (Washington is the name of a city and a state--how many times does it appear in the results?)
-
+SELECT state_name AS place_name
+FROM state
+WHERE state_name LIKE 'W%'
+UNION
+SELECT city_name
+FROM city
+WHERE city_name LIKE 'W%'
+ORDER BY place_name;
 
 -- Modify the previous query to include a column that indicates whether the place is a city or state.
+SELECT state_name AS place_name, 'State' AS place_type
+FROM state
+WHERE state_name LIKE 'W%'
+UNION
+SELECT city_name, 'City' AS place_type
+FROM city
+WHERE city_name LIKE 'W%'
+ORDER BY place_name;
 
-
+-- With unions, make sure you have the same number of columns being returned from each query and that they have matching data types
 
 -- MovieDB
 -- After creating the MovieDB database and running the setup script, make sure it is selected in pgAdmin and confirm it is working correctly by writing queries to retrieve...
