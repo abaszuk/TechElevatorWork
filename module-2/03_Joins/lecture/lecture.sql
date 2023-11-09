@@ -78,10 +78,22 @@ GROUP BY state.state_abbreviation;
 -- UNION
 
 -- Write a query to retrieve all the place names in the city and state tables that begin with "W" sorted alphabetically. (Washington is the name of a city and a state--how many times does it appear in the results?)
-
+SELECT state_name, 'state' AS place_type
+FROM state
+WHERE state_name LIKE 'W%'
+UNION
+SELECT city_name
+FROM city
+WHERE city_name LIKE 'W%';
 
 -- Modify the previous query to include a column that indicates whether the place is a city or state.
-
+SELECT state_name AS place_name, 'state' AS place_type
+FROM state
+WHERE state_name LIKE 'W%'
+UNION
+SELECT city_name, 'city' AS place_type
+FROM city
+WHERE city_name LIKE 'W%';
 
 
 -- MovieDB
