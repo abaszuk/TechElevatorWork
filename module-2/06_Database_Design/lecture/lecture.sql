@@ -39,7 +39,6 @@ CREATE TABLE sales(
 	owner_id INT REFERENCES customer (customer_id),
 	sale_amount money NOT NULL CHECK(sale_amount::numeric >= 0), -- we can also add a check constraint
 	purchase_data DATE NOT NULL DEFAULT (NOW())
-	CONSTRAINT pk_painting_owner PRIMARY KEY (painting_id, owner_id)
 );
 
 
