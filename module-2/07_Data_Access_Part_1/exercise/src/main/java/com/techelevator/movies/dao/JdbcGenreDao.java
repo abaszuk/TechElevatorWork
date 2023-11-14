@@ -2,6 +2,7 @@ package com.techelevator.movies.dao;
 
 import com.techelevator.movies.model.Genre;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -17,16 +18,45 @@ public class JdbcGenreDao implements GenreDao {
 
     @Override
     public List<Genre> getGenres() {
-        return null;
+        List<Genre> genres = new ArrayList<>();
+        String sql = "SELECT genre_id,genre_name\n" +
+                "FROM genre;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()){
+            genres.add(mapRowToGenre(results));
+        }
+        return genres;
     }
 
     @Override
     public Genre getGenreById(int id) {
-        return new Genre(-1, "Not implemented yet");
+        Genre genre = null;
+        String sql = "SELECT genre_id,genre_name\n" +
+                "FROM genre\n" +
+                "WHERE genre_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,id);
+        if (results.next()){
+            genre = mapRowToGenre(results);
+        }
+        return genre;
     }
 
     @Override
     public List<Genre> getGenresByName(String name, boolean useWildCard) {
-        return null;
+        List<Genre> genres = new ArrayList<>();
+        String sql = "SELECT genre_id,genre_name\n" +
+                "FROM genre\n" +
+                "WHERE genre_name = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,name);
+        while (results.next()){
+            genres.add(mapRowToGenre(results));
+        }
+        return genres;
+    }
+    private Genre mapRowToGenre(SqlRowSet rowSet) {
+        Genre genre = new Genre();
+        genre.setId(rowSet.getInt("genre_id"));
+        genre.setName(rowSet.getString("genre_name"));
+        return genre;
     }
 }
