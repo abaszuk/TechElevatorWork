@@ -48,7 +48,10 @@ public class JdbcMovieDao implements MovieDao {
         List<Movie> movies = new ArrayList<>();
         String sql = "SELECT movie_id,title,overview,tagline,poster_path,home_page,release_date,length_minutes,director_id,collection_id\n" +
                 "FROM movie\n" +
-                "WHERE title = ?;";
+                "WHERE title ILIKE ?;";
+        if (useWildCard){
+            title = "%"+title+"%";
+        }
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,title);
         while (results.next()){
             movies.add(mapRowToMovie(results));
@@ -63,7 +66,7 @@ public class JdbcMovieDao implements MovieDao {
         String sql = "SELECT movie_id,title,overview,tagline,poster_path,movie.home_page,release_date,length_minutes,director_id,collection_id\n" +
                 "FROM movie\n" +
                 "JOIN person ON movie.director_id = person.person_id\n" +
-                "WHERE person_name = ? AND release_date > ?-01-01 AND release_date < ?-01-01;";
+                "WHERE person_name ILIKE ? AND release_date > ?-01-01 AND release_date < ?-01-01;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,directorName,startYear,endYear);
         while (results.next()){
             movies.add(mapRowToMovie(results));

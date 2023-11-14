@@ -59,9 +59,12 @@ public class JdbcCollectionDao implements CollectionDao{
     @Override
     public List<Collection> getCollectionsByName(String name, boolean useWildCard) {
         List<Collection> collections = new ArrayList<>();
-        String sql ="SELECT collection_id,collection_name\n" +
+        String sql ="SELECT collection_id, collection_name\n" +
                 "FROM collection\n" +
-                "WHERE collection_name = ?";
+                "WHERE collection_name ILIKE ?";
+        if (useWildCard){
+            name = "%"+name+"%";
+        }
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,name);
         while (results.next()){
             collections.add(mapRowToCollection(results));

@@ -47,7 +47,10 @@ public class JdbcPersonDao implements PersonDao {
         List<Person> persons = new ArrayList<>();
         String sql = "SELECT *\n" +
                 "FROM person\n" +
-                "WHERE person_name = ?;";
+                "WHERE person_name ILIKE ?;";
+        if (useWildCard){
+            name = "%"+name+"%";
+        }
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,name);
         while(results.next()){
             persons.add(mapRowToPerson(results));
