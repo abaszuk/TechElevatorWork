@@ -94,22 +94,84 @@ public class JdbcParkDao implements ParkDao {
 
     @Override
     public Park createPark(Park park) {
-        throw new DaoException("createPark() not implemented");
+        //step 1 declare the variable we want to return
+        Park newPark = null;
+
+        //step 2 - write sql
+        String sql = "INSERT INTO park(park_name,date_established,area,has_camping)\n" +
+                "VALUES (?,?,?,?) RETURNING park_id;";
+        try {
+            //step 3 - send sql to database
+            int parkId = jdbcTemplate.queryForObject(sql,int.class, park.getParkName(),park.getDateEstablished(),park.getArea(),park.getHasCamping());
+
+            //step 4 - read the data
+            newPark = getParkById(parkId);
+        } catch (Exception ex){
+            System.out.println("something went wrong");
+        }
+        //step 5 - return variable
+        return newPark;
     }
 
     @Override
     public Park updatePark(Park park) {
-        throw new DaoException("updatePark() not implemented");
+        Park updatedPark = null;
+
+        String sql = "UPDATE park\n" +
+                "SET (park_name = ?,date_established = ?,area = ?,has_camping = ?)\n" +
+                "WHERE park_id = ?;";
+
+        try{
+            int numberOfRows = jdbcTemplate.update(sql,park.getParkName(),park.getDateEstablished(),park.getArea(),park.getHasCamping());
+
+            if (numberOfRows == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            } else {
+                updatedPark = getParkById(park.getParkId());
+            }
+        } catch (Exception ex){
+            System.out.println("something went wrong");
+        }
+        return updatedPark;
     }
 
     @Override
     public int deleteParkById(int parkId) {
-        throw new DaoException("deleteParkById() not implemented");
+        //step 1
+        int numDeleted = 0;
+
+        //step 2
+        String sql = "DELETE\n" +
+                "FROM park\n" +
+                "WHERE park_id = ?;\n" +
+                "DELETE\n" +
+                "FROM park_state\n" +
+                "WHERE park_id = ?;";
+
+        try{
+            numDeleted = jdbcTemplate.update(sql,parkId,parkId);
+
+        }catch (Exception ex){
+            System.out.println("something went wrong");
+        }
+        return numDeleted;
     }
 
     @Override
+    //this is inserting a new row into the park_state table
     public void linkParkState(int parkId, String stateAbbreviation) {
-        throw new DaoException("linkParkState() not implemented");
+        //step 2
+        String sql = "INSERT INTO park_state(park_id,state_abbreviation" +
+                "VALUES (?,?);";
+        try {
+            //step 3
+            int rowAffected = jdbcTemplate.update(sql,parkId,stateAbbreviation);
+            if (rowAffected == 0) {
+                throw new DaoException("Zero rows affected, expected at least one");
+            }
+        }catch (Exception ex){
+            System.out.println("something went wrong");
+        }
     }
 
     private Park mapRowToPark(SqlRowSet rowSet) {

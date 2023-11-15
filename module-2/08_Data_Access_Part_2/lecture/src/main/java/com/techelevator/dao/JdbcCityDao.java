@@ -101,34 +101,45 @@ public class JdbcCityDao implements CityDao {
 
     @Override
     public City createCity(City city) {
+        //step 1 - create a variable we want to return
         City newCity = null;
+
+        //step 2 write the sql
         String sql = "INSERT INTO city (city_name, state_abbreviation, population, area) " +
                      "VALUES (?, ?, ?, ?) RETURNING city_id;";
         try {
+            //step 3 - send the sql to the database
             int newCityId = jdbcTemplate.queryForObject(sql, int.class,
                     city.getCityName(), city.getStateAbbreviation(), city.getPopulation(), city.getArea());
 
+            //step 4 - read the data
             newCity = getCityById(newCityId);
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+        //step 5 - return variable from step 1
         return newCity;
     }
 
     @Override
     public City updateCity(City city) {
+        //step 1
         City updatedCity = null;
+
+        //step 2
         String sql = "UPDATE city SET city_name = ?, state_abbreviation = ?, population = ?, area = ? " +
                      "WHERE city_id = ?;";
         try {
+            //step 3 - send to databse
             int numberOfRows = jdbcTemplate.update(sql, city.getCityName(), city.getStateAbbreviation(), city.getPopulation(),
                     city.getArea(), city.getCityId());
 
             if (numberOfRows == 0) {
                 throw new DaoException("Zero rows affected, expected at least one");
             } else {
+                //step 4
                 updatedCity = getCityById(city.getCityId());
             }
         } catch (CannotGetJdbcConnectionException e) {
@@ -136,6 +147,7 @@ public class JdbcCityDao implements CityDao {
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
         }
+        //step 5
         return updatedCity;
     }
 

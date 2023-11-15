@@ -76,6 +76,8 @@ public class JdbcPersonDao implements PersonDao {
         while (results.next()){
             persons.add(mapRowToPerson(results));
 
+
+
         }
         return persons;
     }
