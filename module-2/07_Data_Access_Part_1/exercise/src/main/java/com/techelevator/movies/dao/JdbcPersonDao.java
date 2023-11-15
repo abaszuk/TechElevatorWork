@@ -1,5 +1,6 @@
 package com.techelevator.movies.dao;
 
+import com.techelevator.movies.model.Collection;
 import com.techelevator.movies.model.Genre;
 import com.techelevator.movies.model.Person;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -61,7 +62,22 @@ public class JdbcPersonDao implements PersonDao {
 
     @Override
     public List<Person> getPersonsByCollectionName(String collectionName, boolean useWildCard) {
-        return null;
+        List<Person> persons = new ArrayList<>();
+        String sql = "SELECT DISTINCT person.person_name,collection.collection_id,collection_name\n" +
+                "FROM collection\n" +
+                "JOIN movie ON collection.collection_id = movie.collection_id\n" +
+                "JOIN movie_actor ON movie.movie_id = movie_actor.movie_id\n" +
+                "JOIN person ON movie_actor.actor_id = person.person_id\n" +
+                "WHERE collection_name ILIKE ?;";
+        if (useWildCard){
+            collectionName = "%"+collectionName+"%";
+        }
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,collectionName);
+        while (results.next()){
+            persons.add(mapRowToPerson(results));
+
+        }
+        return persons;
     }
     private Person mapRowToPerson(SqlRowSet rowSet) {
         Person person = new Person();
@@ -70,14 +86,14 @@ public class JdbcPersonDao implements PersonDao {
         person.setBiography(rowSet.getString("biography"));
         person.setProfilePath(rowSet.getString("profile_path"));
         person.setHomePage(rowSet.getString("home_page"));
-//        if(rowSet.getDate("birthdate") != null) {
-//            LocalDate dateEstablished = rowSet.getDate("birthdate").toLocalDate();
-//            person.setBirthday(dateEstablished);
-//        }
-//        if(rowSet.getDate("deathdate") != null) {
-//            LocalDate dateEstablished = rowSet.getDate("deathdate").toLocalDate();
-//            person.setDeathDate(dateEstablished);
-//        }
+        if(rowSet.getDate("birthday") != null) {
+            LocalDate birthday = rowSet.getDate("birthday").toLocalDate();
+            person.setBirthday(birthday);
+        }
+        if(rowSet.getDate("deathday") != null) {
+            LocalDate deathday = rowSet.getDate("deathday").toLocalDate();
+            person.setDeathDate(deathday);
+        }
 
         return person;
     }
