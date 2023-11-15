@@ -29,9 +29,13 @@ public class JdbcProjectDao implements ProjectDao {
 		String sql = PROJECT_SELECT +
 				" WHERE p.project_id=?";
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, projectId);
-		if (results.next()) {
-			project = mapRowToProject(results);
+		try {
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql, projectId);
+			if (results.next()) {
+				project = mapRowToProject(results);
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
 		}
 
 		return project;
@@ -42,10 +46,14 @@ public class JdbcProjectDao implements ProjectDao {
 		List<Project> allProjects = new ArrayList<>();
 		String sql = PROJECT_SELECT;
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-		while (results.next()) {
-			Project projectResult = mapRowToProject(results);
-			allProjects.add(projectResult);
+		try {
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+			while (results.next()) {
+				Project projectResult = mapRowToProject(results);
+				allProjects.add(projectResult);
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
 		}
 
 		return allProjects;
@@ -53,26 +61,86 @@ public class JdbcProjectDao implements ProjectDao {
 
 	@Override
 	public Project createProject(Project newProject) {
-		throw new DaoException("createProject() not implemented");
+		Project project = null;
+
+		String sql = "INSERT INTO project(name,from_date,to_date)\n" +
+				"VALUES (?,?,?) RETURNING project_id";
+		try {
+			int projectId = jdbcTemplate.queryForObject(sql,int.class,newProject.getName(),newProject.getFromDate(),newProject.getToDate());
+			project = getProjectById(projectId);
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		return project;
 	}
 	
 	@Override
 	public void linkProjectEmployee(int projectId, int employeeId) {
-		throw new DaoException("linkProjectEmployee() not implemented");
+		String sql = "INSERT INTO project_employee (employee_id,project_id)\n" +
+				"VALUES (?,?);";
+		try{
+			int rowAffected = jdbcTemplate.update(sql,employeeId,projectId);
+			if (rowAffected == 0){
+				throw new DaoException("Zero rows affected, expected at least one");
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
 	}
 
 	@Override
 	public void unlinkProjectEmployee(int projectId, int employeeId) {
-		throw new DaoException("unlinkProjectEmployee() not implemented");
+		String sql = "DELETE\n" +
+				"FROM project_employee\n" +
+				"WHERE employee_id = ? AND project_id = ?;";
+
+		try {
+			int rowAffected = jdbcTemplate.update(sql,employeeId,projectId);
+			if (rowAffected == 0){
+				throw new DaoException("Zero rows affected, expected at least one");
+			}
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
 	}
 
 	@Override
 	public Project updateProject(Project project) {
-		throw new DaoException("updateProject() not implemented");
+		Project updatedProject = null;
+		String sql = "UPDATE project \n" +
+				"SET name = ?,from_date = ?, to_date = ?\n" +
+				"WHERE project_id = ?;";
+		try {
+			int numRows = jdbcTemplate.update(sql,project.getName(),project.getFromDate(),project.getToDate(),project.getId());
+			if (numRows == 0){
+				throw new DaoException("Zero rows affected, expected at least one");
+			} else {
+				updatedProject = getProjectById(project.getId());
+			}
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		return updatedProject;
 	}
 	@Override
 	public int deleteProjectById(int projectId) {
-		throw new DaoException("deleteProjectById() not implemented");
+		int numDeleted = 0;
+		String sql = "DELETE\n" +
+				"FROM project_employee\n" +
+				"WHERE project_id = ?;\n" +
+				"DELETE\n" +
+				"FROM project\n" +
+				"WHERE project_id = ?;";
+		try {
+			numDeleted = jdbcTemplate.update(sql,projectId,projectId);
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		return numDeleted;
 	}
 	
 	private Project mapRowToProject(SqlRowSet results) {

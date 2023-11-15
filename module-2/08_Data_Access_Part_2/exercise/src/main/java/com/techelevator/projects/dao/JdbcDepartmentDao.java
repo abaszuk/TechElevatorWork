@@ -29,9 +29,15 @@ public class JdbcDepartmentDao implements DepartmentDao {
 		String sql = DEPARTMENT_SELECT +
 				" WHERE d.department_id=?";
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-		if (results.next()) {
-			department = mapRowToDepartment(results);
+		try {
+
+
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+			if (results.next()) {
+				department = mapRowToDepartment(results);
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
 		}
 
 		return department;
@@ -42,9 +48,13 @@ public class JdbcDepartmentDao implements DepartmentDao {
 		List<Department> departments = new ArrayList<>();
 		String sql = DEPARTMENT_SELECT;
 
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-		while (results.next()) {
-			departments.add(mapRowToDepartment(results));
+		try {
+			SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+			while (results.next()) {
+				departments.add(mapRowToDepartment(results));
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong",ex);
 		}
 		
 		return departments;
@@ -52,17 +62,65 @@ public class JdbcDepartmentDao implements DepartmentDao {
 
 	@Override
 	public Department createDepartment(Department department) {
-		throw new DaoException("createDepartment() not implemented");
+		//step 1 -
+		Department dept = null;
+
+		//step 2
+		String sql = "INSERT INTO department(name)\n" +
+				"VALUES(?) RETURNING department_id;";
+
+		//step 3
+		try{
+			int deptId = jdbcTemplate.queryForObject(sql,int.class,department.getName());
+
+			//step 4
+			dept = getDepartmentById(deptId);
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		//step 5
+		return dept;
 	}
 
 	@Override
 	public Department updateDepartment(Department department) {
-		throw new DaoException("updateDepartment() not implemented");
+		Department updatedDepartment = null;
+
+		String sql = "UPDATE department\n" +
+				"SET name = ?\n" +
+				"WHERE department_id = ?;";
+		try {
+			int numOfRows = jdbcTemplate.update(sql,department.getName(),department.getId());
+			if (numOfRows == 0){
+				throw new DaoException("Zero rows affected, expected at least one");
+			} else {
+				updatedDepartment = getDepartmentById(department.getId());
+			}
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		return updatedDepartment;
 	}
 
 	@Override
 	public int deleteDepartmentById(int id) {
-		throw new DaoException("updateDepartment() not implemented");
+		int numDeleted = 0;
+
+		String sql = "UPDATE employee\n" +
+				"SET department_id = 0\n" +
+				"WHERE department_id = ?;\n" +
+				"DELETE \n" +
+				"FROM department\n" +
+				"WHERE department_id = ?;";
+
+		try {
+			numDeleted = jdbcTemplate.update(sql,id,id);
+
+		}catch (Exception ex){
+			throw new DaoException("something went wrong");
+		}
+		return numDeleted;
 	}
 
 	private Department mapRowToDepartment(SqlRowSet results) {
