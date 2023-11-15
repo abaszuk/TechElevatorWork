@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,11 @@ public class JdbcPersonDao implements PersonDao {
     @Override
     public Person getPersonById(int id) {
         Person person = null;
-        String sql = "SELECT *\n" +
+        String sql = "SELECT person_id,person_name,birthday,deathday,biography,profile_path,home_page\n" +
                 "FROM person\n" +
                 "WHERE person_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql,id);
-        if (results.next()){
+        while (results.next()){
             person = mapRowToPerson(results);
         }
         return person;
@@ -69,7 +70,14 @@ public class JdbcPersonDao implements PersonDao {
         person.setBiography(rowSet.getString("biography"));
         person.setProfilePath(rowSet.getString("profile_path"));
         person.setHomePage(rowSet.getString("home_page"));
-
+//        if(rowSet.getDate("birthdate") != null) {
+//            LocalDate dateEstablished = rowSet.getDate("birthdate").toLocalDate();
+//            person.setBirthday(dateEstablished);
+//        }
+//        if(rowSet.getDate("deathdate") != null) {
+//            LocalDate dateEstablished = rowSet.getDate("deathdate").toLocalDate();
+//            person.setDeathDate(dateEstablished);
+//        }
 
         return person;
     }

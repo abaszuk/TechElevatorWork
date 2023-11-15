@@ -62,12 +62,18 @@ public class JdbcMovieDao implements MovieDao {
     @Override
     public List<Movie> getMoviesByDirectorNameAndBetweenYears(String directorName, int startYear,
                                                               int endYear, boolean useWildCard) {
+        LocalDate startDate = LocalDate.of(startYear,1,1);
+        LocalDate endDate = LocalDate.of(endYear,12,31);
         List<Movie> movies = new ArrayList<>();
-        String sql = "SELECT movie_id,title,overview,tagline,poster_path,movie.home_page,release_date,length_minutes,director_id,collection_id\n" +
-                "FROM movie\n" +
-                "JOIN person ON movie.director_id = person.person_id\n" +
-                "WHERE person_name ILIKE ? AND release_date > ?-01-01 AND release_date < ?-01-01;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,directorName,startYear,endYear);
+        String sql = "SELECT movie.movie_id,movie.title,movie.overview,movie.tagline,movie.poster_path,movie.home_page,movie.release_date,movie.length_minutes,movie.director_id,movie.collection_id\n" +
+                "FROM person\n" +
+                "JOIN movie ON person.person_id = movie.director_id\n" +
+                "WHERE person_name ILIKE ?\n" +
+                "\tAND release_date BETWEEN ? AND ?;";
+        if (useWildCard) {
+            directorName = "%" + directorName + "%";
+        }
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,directorName,startDate,endDate);
         while (results.next()){
             movies.add(mapRowToMovie(results));
         }
