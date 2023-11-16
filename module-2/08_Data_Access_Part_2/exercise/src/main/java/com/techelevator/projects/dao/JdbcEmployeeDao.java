@@ -173,11 +173,15 @@ public class JdbcEmployeeDao implements EmployeeDao {
 	@Override
 	public int deleteEmployeesByDepartmentId(int departmentId) {
 		int numDeleted = 0;
-		String sql = "DELETE\n" +
+		String employeeProjectSql = "DELETE\n" +
 				"FROM project_employee\n" +
-				"WHERE employee_id IN (SELECT department_id FROM employee WHERE department_id = ?);";
+				"WHERE employee_id IN (SELECT employee_id FROM employee WHERE department_id = ?);";
+		String employeeSql = "DELETE\n" +
+				"FROM employee\n" +
+				"WHERE department_id = ?;";
 		try{
-			numDeleted = jdbcTemplate.update(sql,departmentId);
+			jdbcTemplate.update(employeeProjectSql,departmentId);
+			numDeleted = jdbcTemplate.update(employeeSql,departmentId);
 
 		}catch (Exception ex){
 			throw new DaoException("something went wrong");

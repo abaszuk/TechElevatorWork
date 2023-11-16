@@ -107,15 +107,17 @@ public class JdbcDepartmentDao implements DepartmentDao {
 	public int deleteDepartmentById(int id) {
 		int numDeleted = 0;
 
-		String sql = "UPDATE employee\n" +
+		String updateSql = "UPDATE employee\n" +
 				"SET department_id = 0\n" +
-				"WHERE department_id = ?;\n" +
-				"DELETE \n" +
+				"WHERE department_id = ?;";
+		String deleteSql = "DELETE\n" +
 				"FROM department\n" +
 				"WHERE department_id = ?;";
 
+
 		try {
-			numDeleted = jdbcTemplate.update(sql,id,id);
+			jdbcTemplate.update(updateSql,id);
+			numDeleted = jdbcTemplate.update(deleteSql,id);
 
 		}catch (Exception ex){
 			throw new DaoException("something went wrong");
