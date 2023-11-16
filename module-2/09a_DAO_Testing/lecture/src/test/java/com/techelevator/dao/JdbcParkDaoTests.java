@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class JdbcParkDaoTests extends BaseDaoTests {
 
@@ -25,47 +26,117 @@ public class JdbcParkDaoTests extends BaseDaoTests {
 
     @Test
     public void getParkById_with_valid_id_returns_correct_park() {
-        Assert.fail();
+        //ACT
+        Park park1 = sut.getParkById(1);
+
+        //ASSERT - same as the assertParksMatch method at bottom
+//        Assert.assertEquals(park1.getParkId(),PARK_1.getParkId());
+//        Assert.assertEquals(park1.getParkName(),PARK_1.getParkName());
+//        Assert.assertEquals(park1.getDateEstablished(), PARK_1.getDateEstablished());
+//        Assert.assertEquals(park1.getHasCamping(),PARK_1.getHasCamping());
+//        Assert.assertEquals(park1.getArea(),PARK_1.getArea(),.01);
+        assertParksMatch(PARK_1,park1);
     }
 
     @Test
     public void getParkById_with_invalid_id_returns_null_park() {
-        Assert.fail();
+        //ACT
+        Park fakePark = sut.getParkById(999);
+
+        //ASSERT
+        Assert.assertEquals(null,fakePark);
+        //same as above but different
+        Assert.assertNull(fakePark);
     }
 
     @Test
     public void getParksByState_with_valid_state_returns_correct_parks() {
-        Assert.fail();
+        //ACT
+        List<Park> parks = sut.getParksByState("AA");
+
+        //ASSERT
+        Assert.assertEquals(2,parks.size());
     }
 
     @Test
     public void getParksByState_with_invalid_state_returns_empty_list() {
-        Assert.fail();
+        //ACT
+        List<Park> parks = sut.getParksByState("ZZ");
+
+        //ASSERT
+        Assert.assertEquals(0,parks.size());
     }
 
     @Test
     public void createPark_creates_park() {
-        Assert.fail();
+        //ARRANGE
+        Park newPark = new Park(0,"Test",LocalDate.now(),99,true);
+
+        //ACT
+        Park createdPark = sut.createPark(newPark);
+
+        //ASSERT
+        int newId = createdPark.getParkId();
+        newPark.setParkId(newId);
+        assertParksMatch(newPark,createdPark);
+
+        //EXTRA
+        Park parkInDb = sut.getParkById(newId);
+        assertParksMatch(createdPark,parkInDb);
     }
 
     @Test
     public void updatePark_updates_park() {
-        Assert.fail();
+        //ARRANGE
+        Park parkToUpdate = sut.getParkById(1);
+
+        parkToUpdate.setDateEstablished(LocalDate.now());
+        parkToUpdate.setHasCamping(false);
+        parkToUpdate.setArea(999);
+        parkToUpdate.setParkName("update test");
+
+        //ACT
+        Park updatedPark = sut.updatePark(parkToUpdate);
+
+        //ASSERT
+        Assert.assertNotNull(updatedPark);
+
+        Park retrievedPark = sut.getParkById(1);
+        assertParksMatch(updatedPark,retrievedPark);
+
+
     }
 
     @Test
     public void deleteParkById_deletes_park() {
-        Assert.fail();
+        //ACT
+        int rowsAffected = sut.deleteParkById(1);
+
+        //ASSERT
+        Assert.assertEquals(1,rowsAffected);
+
+        Park park = sut.getParkById(1);
+        Assert.assertNull(park);
     }
 
     @Test
     public void linkParkState_adds_park_to_list_of_parks_in_state() {
-        Assert.fail();
+        //ACT
+        sut.linkParkState(2,"CC");
+
+        //ASSERT
+        List<Park> parks = sut.getParksByState("CC");
+        Assert.assertEquals(2,parks.size());
     }
 
     @Test
     public void unlinkParkState_removes_park_from_list_of_parks_in_state() {
-        Assert.fail();
+        //ACT
+        sut.unlinkParkState(2,"BB");
+
+        //ASSERT
+        List<Park> parks = sut.getParksByState("BB");
+        Assert.assertEquals(0,parks.size());
     }
 
     private void assertParksMatch(Park expected, Park actual) {
