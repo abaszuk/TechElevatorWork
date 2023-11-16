@@ -1,43 +1,55 @@
 Bug 1
 -----
 Test that demonstrates problem:
+getTimesheetsByEmployeeId_with_valid_employee_id_returns_list_of_timesheets_for_employee
 
 Expected output:
+2
 
 Actual output:
+1
 
 How did you fix this bug?
-
+changed if to while
 
 Bug 2
 -----
 Test that demonstrates problem:
+getTimesheetsByProjectId_with_valid_id_returns_list_of_all_timesheets_for_project()
 
 Expected output:
+3
 
 Actual output:
+2
 
 How did you fix this bug?
-
+changed getTimesheetsByProjectId sql WHERE employee_id to WHERE project_id
 
 Bug 3
 -----
 Test that demonstrates problem:
+updateTimesheet_updates_timesheet
 
 Expected output:
+false
 
 Actual output:
+true
 
 How did you fix this bug?
-
+added billable = ? to the end of SET in the sql string and added isBillable to the rowsAffected int
 
 Bug 4
 -----
 Test that demonstrates problem:
+getBillableHours_returns_correct_tota
 
 Expected output:
+2.75
 
 Actual output:
+4.75
 
 How did you fix this bug?
-
+Added billable = true to the end of the WHERE section of the sql string.
