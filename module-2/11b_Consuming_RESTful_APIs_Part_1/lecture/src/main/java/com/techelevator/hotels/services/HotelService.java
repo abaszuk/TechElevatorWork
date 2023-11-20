@@ -11,23 +11,34 @@ public class HotelService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     public Hotel[] listHotels() {
-        return null;
+
+        String url = API_BASE_URL + "/hotels";
+        Hotel[] hotels = restTemplate.getForObject(url,Hotel[].class);
+        return hotels;
     }
 
     public Review[] listReviews() {
-        return null;
+        String url = API_BASE_URL + "/reviews";
+        Review[] reviews = restTemplate.getForObject(url, Review[].class);
+        return reviews;
     }
 
     public Hotel getHotelById(int id) {
-        return null;
+        String url = API_BASE_URL + "/hotels/" + id;
+        Hotel hotel = restTemplate.getForObject(url, Hotel.class);
+        return hotel;
     }
 
     public Review[] getReviewsByHotelId(int hotelId) {
-        return null;
+        String url = API_BASE_URL + "/hotels/" + hotelId + "/reviews";
+        Review[] reviews = restTemplate.getForObject(url, Review[].class);
+        return reviews;
     }
 
     public Hotel[] getHotelsByStarRating(int stars) {
-        return null;
+        String url = API_BASE_URL + "/hotels?stars=" + stars;
+        Hotel[] hotels = restTemplate.getForObject(url, Hotel[].class);
+        return hotels;
     }
 
     public City getWithCustomQuery(){
