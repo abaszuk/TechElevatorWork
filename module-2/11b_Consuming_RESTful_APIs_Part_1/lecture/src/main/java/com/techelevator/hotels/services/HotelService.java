@@ -2,6 +2,7 @@ package com.techelevator.hotels.services;
 
 import com.techelevator.hotels.model.City;
 import com.techelevator.hotels.model.Hotel;
+import com.techelevator.hotels.model.PicOfDay;
 import com.techelevator.hotels.model.Review;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,8 +42,10 @@ public class HotelService {
         return hotels;
     }
 
-    public City getWithCustomQuery(){
-        return null;
+    public PicOfDay getWithCustomQuery(){
+        String url = "";
+        PicOfDay pic = restTemplate.getForObject(url, PicOfDay.class);
+        return pic;
     }
 
 }
