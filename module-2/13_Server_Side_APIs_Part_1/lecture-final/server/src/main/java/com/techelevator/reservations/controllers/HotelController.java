@@ -43,7 +43,8 @@ public class HotelController {
     }
 
     @RequestMapping(path="/hotelSearch", method = RequestMethod.GET)
-    public List<Hotel> getHotelByCityAndState(@RequestParam(required=false) String city, @RequestParam(required=false) String state){
+    public List<Hotel> getHotelByCityAndState(@RequestParam(required=false) String city,
+                                              @RequestParam(required=false) String state){
         return hotelDao.getHotelsByStateAndCity(state,city);
     }
 
