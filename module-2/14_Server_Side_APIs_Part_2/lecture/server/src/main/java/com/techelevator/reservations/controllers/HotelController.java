@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -102,5 +103,17 @@ public class HotelController {
     @RequestMapping(path = "/reservations", method = RequestMethod.POST)
     public Reservation addReservation(@RequestBody Reservation reservation) {
         return reservationDao.createReservation(reservation);
+    }
+
+    @RequestMapping(path = "/reservations/{id}", method = RequestMethod.PUT) //@Valid checks reservation class
+    public Reservation updatedReservation(@PathVariable int id, @RequestBody @Valid Reservation reservation){
+
+        return reservationDao.updateReservation(reservation);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/reservations/{id}")
+    public void deleteReservation(int id){
+        reservationDao.deleteReservationById(id);
     }
 }

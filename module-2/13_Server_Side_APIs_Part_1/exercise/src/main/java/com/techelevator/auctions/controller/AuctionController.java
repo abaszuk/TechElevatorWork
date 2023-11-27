@@ -18,13 +18,13 @@ public class AuctionController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Auction> list(@RequestParam(required = false) String title_like, @RequestParam(defaultValue = "0") double currentBid_lte) {
-        if (title_like != null && currentBid_lte != 0){
-            return auctionDao.getAuctionsByTitleAndMaxBid(title_like, currentBid_lte);
+    public List<Auction> list(@RequestParam(required = false) String title_like, @RequestParam(defaultValue = "0", value = "currentBid_lte") double currentBidLTE) {
+        if (title_like != null && currentBidLTE != 0){
+            return auctionDao.getAuctionsByTitleAndMaxBid(title_like, currentBidLTE);
         } else if (title_like != null){
             return auctionDao.getAuctionsByTitle(title_like);
-        } else if (currentBid_lte != 0){
-            return auctionDao.getAuctionsByMaxBid(currentBid_lte);
+        } else if (currentBidLTE != 0){
+            return auctionDao.getAuctionsByMaxBid(currentBidLTE);
         }
         return auctionDao.getAuctions();
     }
