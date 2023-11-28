@@ -25,8 +25,16 @@ public class HotelService {
     public Reservation addReservation(Reservation newReservation) {
         Reservation returnedReservation = null;
 
-        //TODO: Add implementation
-        BasicLogger.log("HotelService.addReservation() has not been implemented");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(authToken);
+        HttpEntity<Reservation> request = new HttpEntity<>(newReservation, headers);
+
+        try{
+            returnedReservation = restTemplate.postForObject(API_BASE_URL + "reservations", request, Reservation.class);
+        } catch (Exception ex){
+            System.out.println("something went wrong");
+        }
 
         return returnedReservation;
     }

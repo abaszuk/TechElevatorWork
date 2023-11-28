@@ -56,7 +56,7 @@ public class AuctionController {
     public Auction create(@RequestBody @Valid Auction auction) {
         return auctionDao.createAuction(auction);
     }
-
+    
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public Auction update(@Valid @RequestBody Auction auction,
                           @PathVariable int id) throws DaoException {
