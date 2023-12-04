@@ -1,0 +1,38 @@
+body {
+    background-color:rgb(26, 32, 38);
+}
+#title{
+    color: rgb(122, 16, 37);
+    font-size: 24pt;
+    text-align: center;
+}
+.pic{
+    width: 400px;
+}
+#facts-section{
+    color: #fcdcdc;
+    text-decoration: underline;
+}
+#quotes-section{
+    color: #fcdcdc;
+    text-decoration: underline;
+}
+#links-section{
+    color: #fcdcdc;
+    text-decoration: underline;
+}
+tbody{
+    font-style: italic;
+    color: linen;
+}
+thead{
+    color:aliceblue;
+}
+p{
+    color: linen;
+    font-style: italic;
+    padding-left: 50px;
+}
+a{
+    color:aliceblue;
+}
