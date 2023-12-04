@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations</title>
+</head>
+<body>
+    <h1>Reservations</h1>
+    <a href="index.html" title="This is popup text">Back To Home</a>
+    <br/><br/><br/>
+    <form method="POST" action="api/reservations">
+
+        <div>
+            <label for="name" >Name:</label>
+            <input type="text" placeholder="Ex. Christopher" id="name" name="reservationName" />
+        </div>
+
+        <div>
+            <label for="guests"># of Guests:</label>
+            <input type="number" id="guests" name="numOfGuests" />
+        </div>
+
+        <div>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="reservationDate" />
+        </div>
+
+        <div>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="reservationTime" />
+        </div>
+
+        <div>
+            <label for="kidsMenu">Need Kid's Menu:</label>
+            <input type="checkbox" id="kidsMenu" name="kidsMenu" />
+        </div>
+
+        <div>
+            <label for="comments">Comments:</label>
+            <textarea id="comments" name="reservationComments"></textarea>
+        </div>
+
+        <!-- both html elements below create buttons -->
+        <input type="submit" value="Save" /> 
+        <button>Cancel</button>
+    </form>
+</body>
+</html>
