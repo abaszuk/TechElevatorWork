@@ -1,0 +1,24 @@
+#tagline {
+    font-style: italic;
+    font-size: 14pt;
+    color: rgb(255, 85, 0);
+}
+header{
+    background-color: bisque;
+}
+h3{
+    text-decoration: underline;
+}
+h2{
+    text-align: center;
+}
+/*use slash star for comment in css */
+
+/*to select elements by their tag
+use the tag name */
+
+/*to select elements by their id use the hashtag and then the id name*/
+
+.menuItem {
+    width: 100px;
+}

@@ -2,8 +2,10 @@ package com.techelevator.auctions.controller;
 
 import com.techelevator.auctions.dao.AuctionDao;
 import com.techelevator.auctions.dao.MemoryAuctionDao;
+import com.techelevator.auctions.dao.UserDao;
 import com.techelevator.auctions.exception.DaoException;
 import com.techelevator.auctions.model.Auction;
+import com.techelevator.auctions.model.TokenDto;
 import com.techelevator.auctions.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +21,7 @@ import java.util.List;
 public class AuctionController {
 
     private AuctionDao auctionDao;
+    private UserDao userDao;
 
     public AuctionController() {
         this.auctionDao = new MemoryAuctionDao();
@@ -77,7 +80,7 @@ public class AuctionController {
 
     @RequestMapping(path = "/whoami")
     public String whoAmI() {
-        return "user";
+        return "";
     }
 
 }
