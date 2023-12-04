@@ -1,0 +1,42 @@
+
+/*
+In CSS to make a comment, 
+use the slash star like java
+*/
+
+/*
+To select elements by their tag,
+just use the tag name
+*/
+
+header{
+    background-color: lightblue
+}
+h3 {
+    text-decoration: underline;
+}
+h2{
+    text-align: center;
+}
+
+/*
+To select elements by their id
+use the hashtag and then the id name
+*/
+#tagline {
+    font-style: italic;
+    font-size: 14pt;
+    color: rgb(158, 61, 61);
+}
+
+/*
+To select elements by their 
+class, use the . followed by
+the class name
+*/
+.menuItem {
+    width: 100px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
