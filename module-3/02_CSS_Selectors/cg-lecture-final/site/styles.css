@@ -1,0 +1,142 @@
+/*
+    Rules for how to determine
+    what CSS will be applied:
+    1. The most specific selector wins
+    2. If there are multiple selectors each
+       as specific as the others, then 
+       the most recently read CSS wins
+       (the file is read by the browser top to 
+       bottom)
+
+*/
+
+/*
+    Sometimes the body does not take up
+    the full screen. To indicate to it
+    to take up the entire available screen
+    space, we can use the view width
+    and view height
+*/
+
+body {
+    width: 100vw; /*vw = view width, 100 = 100% */
+    height: 100vh; /*vh = view height */
+    background-color: rgb(215, 237, 245)
+}
+
+/*
+If we want the same styling applied to 
+multiple elements, then we can comma-
+separate them
+*/
+h1, blockquote {
+    text-align: center;
+}
+
+/*
+    Remember that to select a class we just put a . in
+    front of the class name.
+
+    Additionally, if we want to specifically say "the image
+    element inside the element with the movie-poster class" 
+    we space separate the selectors
+*/
+.movie-poster img {
+    width: 155px;
+    height: 225px;
+    vertical-align: middle;
+}
+
+.movie-poster {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    background-color: purple;
+}
+
+.marvel {
+    background-color: red;
+}
+.dc {
+    background-color: black;
+}
+
+/*
+If we want to select something by its ID then we put
+a # in front of the ID name
+*/
+#movie-posters-list{
+    text-align: center;
+}
+
+table{
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+table tbody tr td {
+    padding: 5px;
+}
+table thead tr th {
+    text-align: left;
+    background-color: lightgreen;
+}
+
+
+/*
+If we only want one of the elements instead of all 
+of them we can specify which one we want. In this case,
+we want the first column header
+*/
+table thead tr th:nth-child(1) {
+    width: 15%;
+}
+
+table thead tr th:nth-child(2) {
+    width: 10%;
+}
+
+/* could also do nth-child(odd) */
+table tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+table tbody tr:hover {
+    background-color: yellow;
+}
+
+a:visited {
+    color: purple;
+}
+
+#greenLantern {
+    width: 100px;
+
+    /* If we want to center something */
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
+    /*Normal positioning by default: */
+    /*position: static;*/
+
+    /*Or we can say relative to where you would normally be */
+    /*position: relative;
+    left: 200px;
+    top: 200px; */
+
+    /*Or we can force it to stay in a single spot on the page*/
+    /*position: absolute;
+    left: 200px;
+    top: 100px;*/
+
+    /*Or let it keep a spot on the page, but still scroll with you */
+    /*position: fixed;
+    right: 100px;
+    bottom: 100px; */
+
+}
