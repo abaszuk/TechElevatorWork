@@ -1,0 +1,66 @@
+body{
+    width: 100vw; /*vw is view height 100 is 100%*/
+    height: 100vh;
+    background-color: rgb(217, 239, 247);
+}
+h1, blockquote{
+    text-align: center;
+}
+.movie-poster img{
+    width: 155px;
+    height: 225px;
+    vertical-align: middle;
+}
+.movie-poster{
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+}
+#movie-posters-list{
+    text-align: center;
+}
+.marvel {
+    background-color: red;
+}
+.dc {
+    background-color: black;
+}
+table{
+    border: 1px solid black;
+    margin-top: 20px;
+}
+table tbody td {
+    padding: 5px;
+}
+table thead tr th{
+    text-align: left;
+    background-color: lightgreen;
+}
+table thead tr th:nth-child(1){
+    width: 15%;
+}
+table thead tr th:nth-child(2){
+    width: 10%;
+}
+table tbody tr:nth-child(even){
+    background-color: white;
+}
+table tbody tr:nth-child(odd){
+    background-color: lightgray;
+}
+table tbody tr:hover{
+    background-color: yellow;
+}
+a:visited{
+    color: purple;
+}
+#greenLantern{
+    width: 100px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    left: 200px;
+    top: 200px;
+
+}
