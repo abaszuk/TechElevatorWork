@@ -1,4 +1,53 @@
 
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas: 
+        "header header header"
+        "nav main events"
+        "footer footer footer";
+}
+@media screen and (max-width: 768px){
+
+    .container{
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "header header"
+            "nav main"
+            "events main"
+            "footer footer";
+    }
+}
+
+@media screen and (max-width: 550px){
+
+    .container{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "nav"
+            "main"
+            "events"
+            "footer";
+    }
+}
+
+
+header{
+    grid-area: header;
+}
+#menu-nav{
+    grid-area: nav;
+}
+main{
+    grid-area: main;
+}
+#upcoming-events{
+    grid-area: events;
+}
+footer{
+    grid-area: footer;
+}
 
 
 /***** enter grid CSS above this line *****/
