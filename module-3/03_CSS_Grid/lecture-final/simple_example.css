@@ -33,7 +33,27 @@ body{
     grid-area: footer
 }
 
-/****/
+#block2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+     "sb1 sb1"
+     "sb2 sb3";
+}
+
+#subblock1{
+    background-color: orange; 
+
+    grid-area: sb1;
+}
+#subblock2{
+    background-color: darkorange; 
+    grid-area: sb2;
+}
+#subblock3{
+    background-color: lightcoral; 
+    grid-area: sb3;
+}
 
 
 
