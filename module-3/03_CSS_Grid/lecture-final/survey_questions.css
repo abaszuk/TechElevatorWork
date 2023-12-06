@@ -1,0 +1,46 @@
+/*
+vw and vh are always percents of the entire screen
+where % is just the percent of the parent element
+px = pixels
+*/
+#outer {
+ 
+    border: 1px solid black;
+ 
+
+}
+
+#inner {
+    width: 5em;
+    height: 50%;
+    border: 1px solid black;
+}
+.small {
+    width: 50px;
+    height: 50px;
+}
+.blue{
+    background-color: blue;
+}
+.medium{
+    width: 100px;
+    height: 100px;
+}
+
+h1:nth-child(2), h1:nth-child(3){
+    color: purple;
+}
+
+/*
+ em = based on font size of parent element
+ rem = based on font size of root element
+
+ rem is more consistent across elements, where
+ em is going to be proportional to parent
+*/
+span{
+    font-size: 1.5rem;
+}
+div{
+    font-size: 1.5em;
+}
