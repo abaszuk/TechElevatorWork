@@ -9,6 +9,8 @@ body {
   width: 350px;
   padding: 20px;
   display: flex;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .box {

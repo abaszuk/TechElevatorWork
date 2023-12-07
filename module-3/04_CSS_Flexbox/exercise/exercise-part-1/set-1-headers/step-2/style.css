@@ -1,3 +1,10 @@
+ul{
+  display: flex;
+}
+header{
+  display: flex;
+}
+
 body {
   margin: 20px;
   padding: 0

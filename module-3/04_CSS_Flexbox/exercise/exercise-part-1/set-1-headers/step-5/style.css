@@ -1,8 +1,16 @@
+ul{
+  display: flex;
+}
+header{
+  display: flex;
+}
 body {
   margin: 20px;
   padding: 0
 }
-
+.spacer{
+  flex-grow: 1;
+}
 header {
   background-color: #F0F0F0;
   padding: 20px;
