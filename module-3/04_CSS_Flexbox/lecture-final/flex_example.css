@@ -1,0 +1,72 @@
+body{
+    width:95vw;
+    height: 95vh;   
+
+    display: flex;
+
+     /*row, row-reverse, column, column-reverse*/
+    flex-direction: row;
+
+    /*
+        When flex direction is a row, justify-content
+        will control the horizontal orientation of the contents
+
+        When flex direction is a column, justify content
+        will control the vertical orientation of the contents
+    */
+    justify-content: space-between; /*flex-start, center, flex-end, space-around, space-between*/
+    gap: 5px;
+    flex-wrap: nowrap; /*nowrap, wrap, wrap-reverse */
+    /*
+        When flex direction is a row, align-items
+        will control the vertical orientation of the contents
+
+        When flex direction is a column, align-items
+        will control the horizontal orientation of the contents
+    */
+    align-items: center; /*flex-start, center, flex-end, space-around, space-between*/
+}
+
+
+div {
+    width:100px;
+    height:100px;
+    text-align:center;
+    font-size: 50px;
+
+    /*flex grow and shrink aren't necessarily defining
+    a width, but instead defining the rate they will change*/
+    flex-grow: 1;
+    flex-shrink: 1;
+ 
+}
+
+#div1 {
+    /*to define a starting width*/
+    flex-basis: 50%;
+
+    flex-grow: 2;
+    background-color: blue;
+    order: 5;
+}
+
+#div2 {
+    background-color: red;
+    order: 4;
+}
+
+#div3 {
+    background-color: yellow;
+    order: 3;
+}
+
+#div4 {
+    background-color: green;
+    order: 2;
+}
+
+#div5 {
+    background-color: purple;
+    order: 1;
+
+}

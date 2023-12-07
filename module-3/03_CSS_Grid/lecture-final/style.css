@@ -20,6 +20,7 @@ a grid-area to it
         "footer footer footer";
 }
 
+
 @media screen and (max-width: 768px) {
     /*this is saying to only apply the following css
     when screens are less than or equal to 768px*/
@@ -37,6 +38,7 @@ a grid-area to it
         color: blue;
     }
 }
+
 
 @media screen and (max-width: 550px) {
     /*this is saying to only apply the following css
