@@ -41,6 +41,7 @@ body{
         "sb2 sb3"
 }
 
+<<<<<<< HEAD
 #subblock1{
     height: 50px;
     
@@ -55,6 +56,30 @@ body{
 }
 #subblock3{
     height: 50px;
+=======
+#block2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+     "sb1 sb1"
+     "sb2 sb3";
+}
+
+#subblock1{
+    background-color: orange; 
+
+    grid-area: sb1;
+}
+#subblock2{
+    background-color: darkorange; 
+    grid-area: sb2;
+}
+#subblock3{
+    background-color: lightcoral; 
+    grid-area: sb3;
+}
+
+>>>>>>> 2ddfa67a6831191ad8b2cd79338489db83675c00
 
     background-color: orchid;
     grid-area: sb3;
