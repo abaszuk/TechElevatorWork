@@ -10,8 +10,11 @@
  */
 function variables() {
   // Declares a variable where the value cannot be changed
+  const myConst = 10;
   // Declares a variable those value can be changed
+  let myVar = 10;
   // Declares a variable that will always be an array
+  const myArray = [1,2,3,4];
 }
 
 /**
