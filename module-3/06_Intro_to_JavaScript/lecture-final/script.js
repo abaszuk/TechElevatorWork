@@ -76,7 +76,48 @@ function falsy(x) {
     - values can be arrays
     - or they can be functions
 */
-function objects() {
+function test(){
+
+  const myNum = 5;
+  console.log(myNum);
+
+  console.log(5);
+
+ // runMyFunction(myFunction);
+
+  runMyFunction( () => {
+    alert("Hello World");
+  })
+
+
+  let myFunction2 = () => {
+    alert("Hello World");
+  }
+
+}
+
+function myFunction() {
+  alert("Hello World");
+}
+
+
+function runMyFunction( param ) {
+  param();
+}
+
+
+
+function objects2(){
+  let person = objects();
+  person.goRunning();
+}
+
+let objects = () => {
+
+  let goRunningFxn = () => {
+    alert("I'm running now");
+  };
+
   const person = {
     firstName: "Bill",
     lastName: "Lumbergh",
@@ -86,7 +127,8 @@ function objects() {
       "Milton Waddams",
       "Samir Nagheenanajar",
       "Michael Bolton"
-    ]
+    ],
+    goRunning: goRunningFxn
   };
 
   // Log the object
@@ -114,6 +156,7 @@ function objects() {
     console.log(name);
   }
 
+  return person;
 }
 
 /*
