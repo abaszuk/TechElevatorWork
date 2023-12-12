@@ -28,6 +28,10 @@ function printToConsole(value) {
  * @param {number} secondParameter the second parameter to multiply
  * @returns {number} the product of the multiplication
  */
+function multiplyTogether(firstParameter,secondParameter){
+
+  return firstParameter * secondParameter;
+}
 
 /**
  * This version makes sure that no parameters are ever missing. If
@@ -40,7 +44,8 @@ function printToConsole(value) {
  * @param {number} [secondParameter=0] the second parameter to multiply
  * @returns {number} the product of the multiplication
  */
-
+function multiplyNoUndefined(firstParameter=0,secondParameter=0)
+return firstParameter * secondParameter
 
  
 /**
