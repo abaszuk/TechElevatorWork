@@ -110,18 +110,14 @@ function makeHappy(words) {
  *
  * Use `map` and an anonymous function.
  */
-function getFullAddressesOfProperties(object){
-    const mailingAddress = object.map((newData) => {
-        return {
-            streetNumber: newData.streetNumber,
-            streetName: newData.streetName,
-            streetType: newData.streetType,
-            city: newData.city,
-            state: newData.state,
-            zip: newData.zip
+function getFullAddressesOfProperties(address = []){
+    return address.map(
+        (address) => {
+            let formatted = address.streetNumber + " " + address.streetName + " " + address.streetType + " " + address.city + " " + address.state + " " + address.zip;
+            return formatted;
         }
-    })
-    return mailingAddress;
+        
+    )
 }
 
 /** 
