@@ -1,3 +1,4 @@
+
 const bookName = 'Cigar Parties for Dummies';
 const description = 'Host and plan the perfect cigar party for all of your squirrelly friends.';
 const reviews = [
@@ -36,19 +37,57 @@ const reviews = [
  * Get the page title by the id and the query the .name selector
  * once you have the element you can add the product name to the span.
  */
-function setPageTitle() {}
+function setPageTitle() {
+
+  const span = document.querySelector("#page-title .name");
+  span.innerText = bookName;
+}
 
 /**
  * Add the product description to the page.
  */
-function setPageDescription() {}
+function setPageDescription() {
+  const desc = document.querySelector(".description")
+  desc.innerText = description;
+}
 
 /**
  * Display all of the reviews on the page.
  * Loop over the array of reviews and use some helper functions
  * to create the elements needed for the markup and add them to the DOM.
  */
-function displayReviews() {}
+function displayReviews() {
+  const main = document.getElementById("main")
+  reviews.forEach((review) => {
+    const reviewDiv = document.createElement("div");
+    reviewDiv.classList.add("review");
+
+    const h2 = document.createElement("h2");
+    h2.innerText = review.reviewer;
+    reviewDiv.appendChild(h2);
+
+    const ratingDiv = document.createElement("div");
+    ratingDiv.setAttribute("class", "rating");
+    reviewDiv.appendChild(ratingDiv);
+
+    for(let i=0; i < review.rating; i++){
+    const ratingImg = document.createElement("img");
+    ratingImg.src = "img/star.png";
+    ratingImg.classList.add("ratingStar");
+    ratingDiv.appendChild(ratingImg);
+    }
+    const h3 = document.createElement("h3");
+    h3.innerText = review.title;
+    reviewDiv.appendChild(h3);
+
+    const desc = document.createElement("p");
+    desc.innerText = review.review;
+    reviewDiv.appendChild(desc);
+
+    main.appendChild(reviewDiv);
+  }
+  )
+}
 
 /**
  * Create a new h2 element with the name of the reviewer and append it to

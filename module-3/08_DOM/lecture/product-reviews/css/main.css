@@ -2,6 +2,19 @@
     margin: 1rem 0;
     width: 800px;
 }
+.block{
+    width: 100px;
+    height: 100px;
+}
+#block1{
+    background-color: red;
+}
+#block2{
+    background-color: yellow;
+}
+#block3{
+    background-color: pink;
+}
 
 #main div.well-display {
     display: flex;
