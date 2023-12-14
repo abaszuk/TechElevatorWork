@@ -36,3 +36,49 @@ function displayGroceries() {
     ul.appendChild(li);
   });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  setPageTitle();
+  displayGroceries();
+
+  function markAllCompleted() {
+    const completed = document.querySelectorAll("li")
+    const circle = document.querySelectorAll("i")
+    if(allItemsIncomplete == true){
+    completed.forEach((item) => {
+      item.classList.add("completed")
+    })
+    circle.forEach((check) => {
+      check.classList.add("completed")
+    })
+    allItemsIncomplete = false
+  } else if (allItemsIncomplete == false){
+    completed.forEach((item) => {
+      item.classList.remove("completed")
+    })
+    circle.forEach((check) => {
+      check.classList.remove("completed")
+    })
+    allItemsIncomplete = true
+  }
+  
+  }
+
+  const button = document.querySelector(".btn")
+  button.addEventListener("click", markAllCompleted)
+
+  const list = document.querySelector("ul")
+  list.addEventListener("click", (event) => {
+    if(!event.target.classList.add("completed")){
+      event.target.classList.add("completed")
+      event.target.querySelector("i").classList.add("completed")
+    } 
+  })
+  list.addEventListener("dblclick", (event) =>{
+    
+      event.target.classList.remove("completed")
+      event.target.querySelector("i").classList.remove("completed")
+    }
+  )
+
+})
