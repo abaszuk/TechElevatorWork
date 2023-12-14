@@ -59,6 +59,7 @@ function displayReview(review) {
 
 // LECTURE STARTS HERE ---------------------------------------------------------------
 
+
 // Set the product reviews page title.
 setPageTitle();
 // Set the product reviews page description.
